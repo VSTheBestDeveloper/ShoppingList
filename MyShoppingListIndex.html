@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="http://marceljuenemann.github.io/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="ShoppingListApp.js"></script>
+  </head>
+<body>
+<div ng-app="myShoppingList" ng-cloak ng-controller="myCtrl" >
+ <div class= "w3-row">
+ <div class="w3-col s6"> 
+ <header class="w3-container w3-light-grey w3-padding-16">
+    <h1>My Shopping List</h1>
+  </header>
+  <ul class="w3-ul" dnd-list="list.products" >
+    <li ng-repeat="item in list.products"
+     class="ng-binding ng-scope"
+     dnd-draggable="item" 
+     dnd-moved="list.splice($index, 1)" 
+     dnd-effect-allowed="move" dnd-selected="selected = item" 
+     ng-class="{'selected': selected === item}" draggable="true" 
+     >{{item}}
+     <span ng-click="removeprodItem($index)" 
+     style="cursor:pointer;" 
+     class="w3-right w3-margin-right">×</span></li>
+  </ul>
+  <div class="w3-container w3-light-grey w3-padding-16">
+    <div class="w3-row w3-margin-top">
+      <div class="w3-col s10">
+        <input placeholder="Add shopping items here" ng-model="addMe" class="w3-input w3-border w3-padding">
+      </div>
+      <div class="w3-col s2">
+        <button ng-click="addItem()" class="w3-btn w3-padding w3-green">Add</button>
+      </div>
+    </div>
+    <p class="w3-text-red">{{errortext}}</p>
+  </div>
+
+</div>
+<div class = "w3-col s6">
+
+ <header class="w3-container w3-light-grey w3-padding-16">
+    <h1>Need it Now</h1>
+  </header>
+  <ul class="w3-ul" dnd-list="list.NeedMoreNow">
+    <li ng-repeat="item in list.NeedMoreNow" 
+    class="ng-binding ng-scope"
+    dnd-draggable="item" dnd-moved="list.splice($index, 1)" 
+    dnd-effect-allowed="move" 
+    dnd-selected="selected = item" 
+    ng-class="{'selected': selected === item}" 
+    draggable="true">{{item}}<span ng-click="removeNeedItem($index)" style="cursor:pointer;" 
+    class="w3-right w3-margin-right">×</span></li>
+  </ul>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
